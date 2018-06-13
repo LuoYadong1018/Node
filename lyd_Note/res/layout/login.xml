@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical" 
+    android:background="@drawable/login_bg">
+    <TextView 
+        android:id="@+id/tvuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名"
+        android:textSize="20sp"
+        android:textColor="#8c6931"/>
+    <EditText
+        android:id="@+id/txtLogin1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvuser"
+        android:hint="请输入用户名" >
+    </EditText>
+    <TextView 
+        android:id="@+id/tvpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtLogin1"
+        android:text="密码"
+        android:textSize="20sp"
+        android:textColor="#8c6931"/>
+  	<EditText
+        android:id="@+id/txtLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvpwd"
+        android:inputType="textPassword"
+        android:hint="请输入密码" >
+    </EditText>
+    <Button
+        android:id="@+id/btregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btlogin"
+        android:text="注册" />    <Button
+        android:id="@+id/btlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txtLogin"
+        android:layout_below="@+id/txtLogin"
+        android:text="登录" />
+    <Button
+        android:id="@+id/btexit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btregister"
+        android:layout_alignBottom="@+id/btregister"
+        android:layout_alignRight="@+id/btlogin"
+        android:text="退出" />
+</RelativeLayout>
