@@ -1,0 +1,50 @@
+上午：
+
+在边界路由器上配置到Internet的默认路由；
+
+Dongfeng_Nic_Router1(config)#interface FastEthernet4/0
+Dongfeng_Nic_Router1(config-if)#ip address 201.201.201.1 255.255.255.0
+Dongfeng_Nic_Router1(config-if)#no shutdown
+Dongfeng_Nic_Router1(config-if)#exit
+Dongfeng_Nic_Router1(config)#ip route 0.0.0.0 0.0.0.0 201.201.201.2
+Dongfeng_Nic_Router1(config)#router ospf 1
+Dongfeng_Nic_Router1(config-router)#default-information originate 
+
+
+ISP(config)#interface FastEthernet5/0
+ISP(config-if)#ip address 201.201.201.2 255.255.255.0
+ISP(config-if)#no shutdown
+ISP(config-if)#exit
+ISP(config)#interface FastEthernet0/0
+ISP(config-if)#ip address 202.202.202.254 255.255.255.0
+ISP(config-if)#no shutdown
+
+配置无线连接；
+Kexue_Library_Switch2(config)#interface FastEthernet0/1
+Kexue_Library_Switch2(config-if)#switchport access vlan 88
+
+
+下午：
+
+在 出口路由器上配置动态 NAT
+
+Dongfeng_Nic_Router1(config)#access-list 1 permit 192.168.10.0 0.0.0.255
+Dongfeng_Nic_Router1(config)#access-list 1 permit 192.168.20.0 0.0.0.255
+Dongfeng_Nic_Router1(config)#access-list 1 permit 192.168.88.0 0.0.0.255
+Dongfeng_Nic_Router1(config)#access-list 1 permit 192.168.30.0 0.0.0.255
+Dongfeng_Nic_Router1(config)#ip nat pool zzuli 201.201.201.100 201.201.201.200 netmask 255.255.255.0
+Dongfeng_Nic_Router1(config)#ip nat inside source list 1 pool zzuli overload 
+Dongfeng_Nic_Router1(config)#interface fastEthernet 0/0
+Dongfeng_Nic_Router1(config-if)#ip nat inside 
+Dongfeng_Nic_Router1(config-if)#exit
+Dongfeng_Nic_Router1(config)#interface fastEthernet 1/0
+Dongfeng_Nic_Router1(config-if)#ip nat inside 
+Dongfeng_Nic_Router1(config-if)#exit
+Dongfeng_Nic_Router1(config)#interface fastEthernet 4/0
+Dongfeng_Nic_Router1(config-if)#ip nat outside 
+Dongfeng_Nic_Router1(config-if)#exit
+
+
+在 出口路由器上配置静态 NAT
+
+Dongfeng_Nic_Router1(config)#ip nat inside source static 192.168.88.1 201.201.201.11

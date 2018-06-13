@@ -1,0 +1,59 @@
+
+Yuzhou_Nic_Router0(config)#interface FastEthernet1/0
+Yuzhou_Nic_Router0(config-if)#ip address 10.10.10.9 255.255.255.252
+Yuzhou_Nic_Router0(config-if)#no shutdown
+Yuzhou_Nic_Router0(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.10
+
+
+Kexue_Nic_MultilayerSwitch1(config)#interface FastEthernet0/24
+Kexue_Nic_MultilayerSwitch1(config-if)#no switchport 
+Kexue_Nic_MultilayerSwitch1(config-if)#ip address 10.10.10.1 255.255.255.252
+Kexue_Nic_MultilayerSwitch1(config-if)#no shutdown
+Kexue_Nic_MultilayerSwitch1(config)#interface FastEthernet0/23
+Kexue_Nic_MultilayerSwitch1(config-if)#no switchport 
+Kexue_Nic_MultilayerSwitch1(config-if)#ip address 10.10.10.10 255.255.255.252
+Kexue_Nic_MultilayerSwitch1(config-if)#no shutdown
+Kexue_Nic_MultilayerSwitch1(config)#ip route 192.168.30.0 255.255.255.0 10.10.10.9
+Kexue_Nic_MultilayerSwitch1(config)#ip route 192.168.40.0 255.255.255.0 10.10.10.9
+Kexue_Nic_MultilayerSwitch1(config)#router ospf 1
+Kexue_Nic_MultilayerSwitch1(config-router)#network 10.10.10.0 0.0.0.3 area 0
+Kexue_Nic_MultilayerSwitch1(config-router)#network 192.168.10.0 0.0.0.255 area 0
+Kexue_Nic_MultilayerSwitch1(config-router)#network 192.168.20.0 0.0.0.255 area 0
+Kexue_Nic_MultilayerSwitch1(config-router)#network 192.168.88.0 0.0.0.255 area 0
+Kexue_Nic_MultilayerSwitch1(config-router)#redistribute static subnets
+
+
+Dongfeng_Nic_Router1(config)#interface FastEthernet0/0
+Dongfeng_Nic_Router1(config-if)#ip address 10.10.10.2 255.255.255.252
+Dongfeng_Nic_Router1(config-if)#no shutdown
+Dongfeng_Nic_Router1(config-if)#exit
+Dongfeng_Nic_Router1(config)#interface FastEthernet1/0
+Dongfeng_Nic_Router1(config-if)#ip address 10.10.10.6 255.255.255.252
+Dongfeng_Nic_Router1(config-if)#no shutdown
+Dongfeng_Nic_Router1(config-if)#exit
+Dongfeng_Nic_Router1(config)#router ospf 1
+Dongfeng_Nic_Router1(config-router)#network 10.10.10.0 0.0.0.3 area 0
+Dongfeng_Nic_Router1(config-router)#network 10.10.10.4 0.0.0.3 area 0
+
+
+
+Kexue_Nic_MultilayerSwitch2(config)#interface FastEthernet0/24
+Kexue_Nic_MultilayerSwitch2(config-if)#no switchport 
+Kexue_Nic_MultilayerSwitch2(config-if)#ip address 10.10.10.5 255.255.255.252
+Kexue_Nic_MultilayerSwitch2(config-if)#no shutdown
+Kexue_Nic_MultilayerSwitch2(config)#router ospf 1
+Kexue_Nic_MultilayerSwitch2(config-router)#network 10.10.10.4 0.0.0.3 area 0
+Kexue_Nic_MultilayerSwitch2(config-router)#network 192.168.10.0 0.0.0.255 area 0
+Kexue_Nic_MultilayerSwitch2(config-router)#network 192.168.20.0 0.0.0.255 area 0
+Kexue_Nic_MultilayerSwitch2(config-router)#network 192.168.88.0 0.0.0.255 area 0
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+2017.12.13上午：
+Kexue_Nic_MultilayerSwitch2上的配置：
+
+enable
+configure terminal 
+vlan 10
+exit
+vlan 20
+exit
+vlan 88
+exit
+interface FastEthernet0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+exit
+interface FastEthernet0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+exit
+interface FastEthernet0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+exit
+interface vlan 10
+ip address 192.168.10.253 255.255.255.0
+exit
+interface vlan 20
+ip address 192.168.20.254 255.255.255.0
+exit
+interface vlan 88
+ip address 192.168.88.254 255.255.255.0
+exit
+ip routing
+end
+write
+
+链路聚合配置：
+
+Kexue_Nic_MultilayerSwitch1>enable
+Kexue_Nic_MultilayerSwitch1#conf ter
+Kexue_Nic_MultilayerSwitch1(config)#interface range gigabitEthernet 0/1-2
+Kexue_Nic_MultilayerSwitch1(config-if-range)#channel-group 1 mode on
+Kexue_Nic_MultilayerSwitch1(config-if-range)#switchport trunk encapsulation dot1q 
+Kexue_Nic_MultilayerSwitch1(config-if-range)#switchport mode trunk
+
+
+
+Kexue_Nic_MultilayerSwitch2>enable
+Kexue_Nic_MultilayerSwitch2#conf ter
+Kexue_Nic_MultilayerSwitch2(config)#interface range gigabitEthernet 0/1-2
+Kexue_Nic_MultilayerSwitch2(config-if-range)#channel-group 1 mode on
+Kexue_Nic_MultilayerSwitch2(config-if-range)#switchport trunk encapsulation dot1q 
+Kexue_Nic_MultilayerSwitch2(config-if-range)#switchport mode trunk
+
+PVST配置：
+
+Kexue_Nic_MultilayerSwitch1(config)#spanning-tree mode pvst 
+Kexue_Nic_MultilayerSwitch1(config)#spanning-tree vlan 10 root primary 
+Kexue_Nic_MultilayerSwitch1(config)#spanning-tree vlan 20,88 root secondary 
+
+Kexue_Nic_MultilayerSwitch1>enable 
+Kexue_Nic_MultilayerSwitch1#show running-config 
+
+Kexue_Nic_MultilayerSwitch2(config)#spanning-tree mode pvst 
+Kexue_Nic_MultilayerSwitch2(config)#spanning-tree vlan 20，88 root primary 
+Kexue_Nic_MultilayerSwitch2(config)#spanning-tree vlan 10 root secondary 
+
+
+
+HSRP路由配置：
+
+Kexue_Nic_MultilayerSwitch1(config)#interface vlan 10
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 1 ip 192.168.10.250 
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 1 priority 150
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 1 preempt 
+
+Kexue_Nic_MultilayerSwitch1(config)#inter vlan 20
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 2 ip 192.168.20.250
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 2 preempt 
+
+Kexue_Nic_MultilayerSwitch1(config)#interface vlan 88
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 3 ip 192.168.88.250
+Kexue_Nic_MultilayerSwitch1(config-if)#standby 3 preempt 
+
+
+
+Kexue_Nic_MultilayerSwitch2(config)#interface vlan 10
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 1 ip 192.168.10.250
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 1 preempt 
+
+Kexue_Nic_MultilayerSwitch2(config)#inter vlan 20
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 2 ip  192.168.20.250
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 2 priority 150
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 2 preempt 
+
+Kexue_Nic_MultilayerSwitch2(config)#inter vlan 88
+Kexue_Nic_MultilayerSwitch2(config-if)#standby  3 ip 192.168.88.250
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 3 priority 150
+Kexue_Nic_MultilayerSwitch2(config-if)#standby 3 preempt 
+
+

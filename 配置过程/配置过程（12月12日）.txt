@@ -1,0 +1,214 @@
+2017.12.12上午：
+
+Yuzhou_Nic_Router0上的配置如下：
+
+Yuzhou_Nic_Router0>enable 
+Yuzhou_Nic_Router0#configure terminal 
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0.30
+Yuzhou_Nic_Router0(config-subif)#encapsulation dot1Q 30
+Yuzhou_Nic_Router0(config-subif)#ip address 192.168.30.254 255.255.255.0
+Yuzhou_Nic_Router0(config-subif)#exit
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0.40
+Yuzhou_Nic_Router0(config-subif)#encapsulation dot1Q 40
+Yuzhou_Nic_Router0(config-subif)#ip address 192.168.40.254 255.255.255.0
+Yuzhou_Nic_Router0(config-subif)#exit
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0
+Yuzhou_Nic_Router0(config-if)#no shutdown
+Yuzhou_Nic_Router0(config-if)#end
+Yuzhou_Nic_Router0#write
+
+
+Yuzhou_soft_Switch4上的配置如下：
+
+Yuzhou_soft_Switch4>enable 
+Yuzhou_soft_Switch4#configure terminal 
+Yuzhou_soft_Switch4(config)#vlan 30
+Yuzhou_soft_Switch4(config-vlan)#exit
+Yuzhou_soft_Switch4(config)#vlan 40
+Yuzhou_soft_Switch4(config-vlan)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/1
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#end
+Yuzhou_soft_Switch4#write
+
+Yuzhou_soft_Switch5上的配置如下：
+
+Yuzhou_soft_Switch5>enable
+Yuzhou_soft_Switch5#configure terminal
+Yuzhou_soft_Switch5(config)#vlan 30
+Yuzhou_soft_Switch5(config-vlan)#exit
+Yuzhou_soft_Switch5(config)#vlan 40
+Yuzhou_soft_Switch5(config-vlan)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/6
+Yuzhou_soft_Switch5(config-if)#switchport access vlan 30
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/7
+Yuzhou_soft_Switch5(config-if)#switchport access vlan 40
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch5(config-if)#switchport mode trunk
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch5(config-if)#switchport mode trunk
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config-if)#end
+Yuzhou_soft_Switch5#write
+
+
+Yuzhou_soft_Switch6上的配置如下：
+
+Yuzhou_soft_Switch6>enable
+Yuzhou_soft_Switch6#configure terminal
+Yuzhou_soft_Switch6(config)#vlan 30
+Yuzhou_soft_Switch6(config-vlan)#exit
+Yuzhou_soft_Switch6(config)#vlan 40
+Yuzhou_soft_Switch6(config-vlan)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/9
+Yuzhou_soft_Switch6(config-if)#switchport access vlan 30
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/10
+Yuzhou_soft_Switch6(config-if)#switchport access vlan 40
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch6(config-if)#switchport mode trunk
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch6(config-if)#switchport mode trunk
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config-if)#end
+Yuzhou_soft_Switch6#write
+
+
+2017.12.12下午：
+
+Yuzhou_Nic_Router0上的DHCP相关配置如下：
+
+Yuzhou_Nic_Router0>enable 
+Yuzhou_Nic_Router0#configure terminal
+Yuzhou_Nic_Router0(config)#ip dhcp pool vlan30 
+Yuzhou_Nic_Router0(dhcp-config)#network 192.168.30.0 255.255.255.0
+Yuzhou_Nic_Router0(dhcp-config)#default-router 192.168.30.254
+Yuzhou_Nic_Router0(dhcp-config)#dns-server 192.168.88.1
+Yuzhou_Nic_Router0(dhcp-config)#exit
+Yuzhou_Nic_Router0(config)#ip dhcp pool vlan40
+Yuzhou_Nic_Router0(dhcp-config)#network 192.168.40.0  255.255.255.0
+Yuzhou_Nic_Router0(dhcp-config)#default-router 192.168.40.254
+Yuzhou_Nic_Router0(dhcp-config)#dns-server 192.168.88.1
+Yuzhou_Nic_Router0(dhcp-config)#exit
+Yuzhou_Nic_Router0(config)#ip dhcp excluded-address 192.168.30.1 192.168.30.10
+Yuzhou_Nic_Router0(config)#ip dhcp excluded-address 192.168.30.254
+Yuzhou_Nic_Router0(config)#ip dhcp excluded-address 192.168.40.1 192.168.40.10
+Yuzhou_Nic_Router0(config)#ip dhcp excluded-address 192.168.40.254
+Yuzhou_Nic_Router0(config-if)#end
+Yuzhou_Nic_Router0#write
+
+
+核心交换部分：
+ 
+Kexue_Nic_MultilayerSwitch1上的配置如下：
+
+Kexue_Nic_MultilayerSwitch1>enable
+Kexue_Nic_MultilayerSwitch1#configure terminal 
+Kexue_Nic_MultilayerSwitch1(config)#vlan 10
+Kexue_Nic_MultilayerSwitch1(config-vlan)#exit
+Kexue_Nic_MultilayerSwitch1(config)#vlan 20
+Kexue_Nic_MultilayerSwitch1(config-vlan)#exit
+Kexue_Nic_MultilayerSwitch1(config)#vlan 88
+Kexue_Nic_MultilayerSwitch1(config-vlan)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface FastEthernet0/1
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport trunk encapsulation dot1q
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport mode trunk
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface FastEthernet0/2
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport trunk encapsulation dot1q
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport mode trunk
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface FastEthernet0/3
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport trunk encapsulation dot1q
+Kexue_Nic_MultilayerSwitch1(config-if)#switchport mode trunk
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface vlan 10
+Kexue_Nic_MultilayerSwitch1(config-if)#ip address 192.168.10.254 255.255.255.0
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface vlan 20
+Kexue_Nic_MultilayerSwitch1(config-if)#ip address 192.168.20.253 255.255.255.0
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#interface vlan 88
+Kexue_Nic_MultilayerSwitch1(config-if)#ip address 192.168.88.253 255.255.255.0
+Kexue_Nic_MultilayerSwitch1(config-if)#exit
+Kexue_Nic_MultilayerSwitch1(config)#ip routing
+Kexue_Nic_MultilayerSwitch1(config)#end
+Kexue_Nic_MultilayerSwitch1#write
+
+Kexue_Soft_Switch1上的配置如下：
+
+Kexue_Soft_Switch1>enable
+Kexue_Soft_Switch1#configure terminal
+Kexue_Soft_Switch1(config)#vlan 10
+Kexue_Soft_Switch1(config-vlan)#exit
+Kexue_Soft_Switch1(config)#vlan 20
+Kexue_Soft_Switch1(config-vlan)#exit
+Kexue_Soft_Switch1(config)#interface FastEthernet0/23
+Kexue_Soft_Switch1(config-if)#switchport mode trunk
+Kexue_Soft_Switch1(config-if)#exit
+Kexue_Soft_Switch1(config)#interface FastEthernet0/1
+Kexue_Soft_Switch1(config-if)#switchport access vlan 10
+Kexue_Soft_Switch1(config-if)#exit
+Kexue_Soft_Switch1(config)#interface FastEthernet0/2
+Kexue_Soft_Switch1(config-if)#switchport access vlan 20
+Kexue_Soft_Switch1(config-if)#exit
+Kexue_Soft_Switch1(config)#end
+Kexue_Soft_Switch1#write
+
+
+Kexue_Library_Switch2上的配置如下：
+
+Kexue_Library_Switch2>enable
+Kexue_Library_Switch2#configure terminal
+Kexue_Library_Switch2(config)#vlan 10
+Kexue_Library_Switch2(config-vlan)#exit
+Kexue_Library_Switch2(config)#vlan 20
+Kexue_Library_Switch2(config-vlan)#exit
+Kexue_Library_Switch2(config)#vlan 88
+Kexue_Library_Switch2(config-vlan)#exit
+Kexue_Library_Switch2(config)#interface FastEthernet0/23
+Kexue_Library_Switch2(config-if)#switchport mode trunk
+Kexue_Library_Switch2(config-if)#exit
+Kexue_Library_Switch2(config)#interface FastEthernet0/3
+Kexue_Library_Switch2(config-if)#switchport access vlan 10
+Kexue_Library_Switch2(config-if)#exit
+Kexue_Library_Switch2(config)#interface FastEthernet0/4
+Kexue_Library_Switch2(config-if)#switchport access vlan 20
+Kexue_Library_Switch2(config-if)#end
+Kexue_Library_Switch2#write
+
+
+Kexue_Nic_Switch3上的配置如下：
+
+Kexue_Nic_Switch3>enable
+Kexue_Nic_Switch3#configure terminal
+Kexue_Nic_Switch3(config)#vlan 88
+Kexue_Nic_Switch3(config-vlan)#exit
+Kexue_Nic_Switch3(config)#interface FastEthernet0/23
+Kexue_Nic_Switch3(config-if)#switchport mode trunk
+Kexue_Nic_Switch3(config-if)#exit
+Kexue_Nic_Switch3(config)#interface FastEthernet0/1
+Kexue_Nic_Switch3(config-if)#switchport access vlan 88
+Kexue_Nic_Switch3(config-if)#exit
+Kexue_Nic_Switch3(config)#interface FastEthernet0/2
+Kexue_Nic_Switch3(config-if)#switchport access vlan 88
+Kexue_Nic_Switch3(config-if)#end
+Kexue_Nic_Switch3#write
+
+
+
+
+
+
+

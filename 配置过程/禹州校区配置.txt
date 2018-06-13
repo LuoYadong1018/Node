@@ -1,0 +1,79 @@
+
+Yuzhou_Nic_Router0>enable 
+Yuzhou_Nic_Router0#configure terminal 
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0.30
+Yuzhou_Nic_Router0(config-subif)#encapsulation dot1Q 30
+Yuzhou_Nic_Router0(config-subif)#ip address 192.168.30.254 255.255.255.0
+Yuzhou_Nic_Router0(config-subif)#exit
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0.40
+Yuzhou_Nic_Router0(config-subif)#encapsulation dot1Q 40
+Yuzhou_Nic_Router0(config-subif)#ip address 192.168.40.254 255.255.255.0
+Yuzhou_Nic_Router0(config-subif)#exit
+Yuzhou_Nic_Router0(config)#interface fastEthernet 0/0
+Yuzhou_Nic_Router0(config-if)#no shutdown
+Yuzhou_Nic_Router0(config-if)#end
+Yuzhou_Nic_Router0#write
+
+Yuzhou_soft_Switch4>enable 
+Yuzhou_soft_Switch4#configure terminal 
+Yuzhou_soft_Switch4(config)#vlan 30
+Yuzhou_soft_Switch4(config-vlan)#exit
+Yuzhou_soft_Switch4(config)#vlan 40
+Yuzhou_soft_Switch4(config-vlan)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/1
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#exit
+Yuzhou_soft_Switch4(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch4(config-if)#switchport mode trunk
+Yuzhou_soft_Switch4(config-if)#end
+Yuzhou_soft_Switch4#write
+
+
+Yuzhou_soft_Switch5>enable
+Yuzhou_soft_Switch5#configure terminal
+Yuzhou_soft_Switch5(config)#vlan 30
+Yuzhou_soft_Switch5(config-vlan)#exit
+Yuzhou_soft_Switch5(config)#vlan 40
+Yuzhou_soft_Switch5(config-vlan)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/6
+Yuzhou_soft_Switch5(config-if)#switchport access vlan 30
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/7
+Yuzhou_soft_Switch5(config-if)#switchport access vlan 40
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch5(config-if)#switchport mode trunk
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch5(config-if)#switchport mode trunk
+Yuzhou_soft_Switch5(config-if)#exit
+Yuzhou_soft_Switch5(config-if)#end
+Yuzhou_soft_Switch5#write
+
+
+
+Yuzhou_soft_Switch6>enable
+Yuzhou_soft_Switch6#configure terminal
+Yuzhou_soft_Switch6(config)#vlan 30
+Yuzhou_soft_Switch6(config-vlan)#exit
+Yuzhou_soft_Switch6(config)#vlan 40
+Yuzhou_soft_Switch6(config-vlan)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/9
+Yuzhou_soft_Switch6(config-if)#switchport access vlan 30
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/10
+Yuzhou_soft_Switch6(config-if)#switchport access vlan 40
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/23
+Yuzhou_soft_Switch6(config-if)#switchport mode trunk
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config)#interface FastEthernet0/24
+Yuzhou_soft_Switch6(config-if)#switchport mode trunk
+Yuzhou_soft_Switch6(config-if)#exit
+Yuzhou_soft_Switch6(config-if)#end
+Yuzhou_soft_Switch6#write
+
+
